@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: 'orders', component: OrdersLayout },
   { path: 'orders/tracking/:id', component: OrderTracking },
   { path: 'cart', component: ShoppingCart },
-  { path: 'checkout/confirmation', component: OrderConfirmationComponent },
+  { path: 'checkout/confirmation/:id', component: OrderConfirmationComponent },
   { path: 'checkout', component: Checkout },
   { path: 'products/:id', component: ProductDetails },
   { path: '', component: ProductLayout },

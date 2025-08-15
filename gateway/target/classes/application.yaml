@@ -26,8 +26,16 @@ spring:
           uri: http://clients-ms:8003
           predicates:
             - Path=/api/clients/**
+        - id: tracking-ms
+          uri: http://tracking-ms:8003
+          predicates:
+            - Path=/api/tracking/**
+        - id: order-ms
+          uri: http://order-ms:8003
+          predicates:
+            - Path=/api/orders/**
         - id: auth-ms
-          uri: http://auth-ms:8003
+          uri: http://auth-ms:9000
           predicates:
             - Path=/api/auth/**
 

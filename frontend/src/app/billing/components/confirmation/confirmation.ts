@@ -1,64 +1,66 @@
+import { Component, inject, signal, computed } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import { cartService } from '@app/shopping-cart/services/cart-service';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  gameBlackKnightHelm,
-  gameTreasureMap,
-  gamePointySword,
-  gameScrollUnfurled,
-  gameDeliveryDrone,
-  gameOpenTreasureChest,
-  gameRoyalLove,
-  gameWaxSeal
-} from '@ng-icons/game-icons';
+import { NgIcon } from '@ng-icons/core';
+
+interface Order {
+  id: number;
+  clientId: number;
+  productIds: number[];
+  shippingAddress: string;
+  paymentMethod: string;
+  total: number;
+  status: string;
+  createdAt: number;
+}
 
 @Component({
+  imports: [ NgIcon, CurrencyPipe],
   selector: 'app-order-confirmation',
-  imports: [NgIconComponent, CurrencyPipe, DatePipe],
   templateUrl: './confirmation.html',
   styles: [``],
-  providers: [
-    provideIcons({
-      gameBlackKnightHelm,
-      gameTreasureMap,
-      gamePointySword,
-      gameScrollUnfurled,
-      gameDeliveryDrone,
-      gameOpenTreasureChest,
-      gameRoyalLove,
-      gameWaxSeal
-    }),
-  ],
 })
 export class OrderConfirmationComponent {
-  orderId = 'KN' + Math.floor(Math.random() * 1000000);
-  orderDate = new Date();
-  expectedDeliveryDate = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000);
-  shippingMethod = 'Royal Gryphon Express';
+  private route = inject(ActivatedRoute);
+  private http = inject(HttpClient);
+  private datePipe = inject(DatePipe);
 
-  orderTotal = cartService.getTotal() + 15.0; // 15.00 shipping
-  cartItems = cartService.getCartItems();
+  // Reactive state
+  order = signal<Order | null>(null);
+  loading = signal(true);
 
-  // Example data - should come from checkout form
-  shippingAddress = {
-    fullName: 'Sir Lancelot du Lac',
-    street1: '123 Round Table Rd',
-    street2: 'Dungeon Level 3',
-    city: 'Camelot',
-    realm: 'Albion',
-    scrollCode: 'EXC4L1BUR',
-    kingdom: 'Kingdom of Britannia',
-  };
+  // Computed properties
+  orderDate = computed(
+    () =>
+      this.datePipe.transform(
+        this.order()?.createdAt ? new Date(this.order()!.createdAt) : null,
+        'mediumDate'
+      ) || 'N/A'
+  );
 
-  paymentMethod = {
-    lastFour: '4999',
-    expiry: '12/24',
-  };
+  constructor() {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.fetchOrder(id);
+      }
+    });
+  }
 
-  // cartItems = [
-  //   { name: 'Excalibur Status', price: 79, quantity: 1 },
-  //   { name: 'Chronometer Année', price: 129, quantity: 1 },
-  //   { name: 'Battle Pendant Line', price: 49.99, quantity: 1 },
-  // ];
+  private fetchOrder(orderId: string): void {
+    this.loading.set(true);
+    this.http
+      .get<Order>(`http://localhost:8080/api/order/${orderId}`)
+      .subscribe({
+        next: (order) => {
+          this.order.set(order);
+          this.loading.set(false);
+        },
+        error: (err) => {
+          console.error('Failed to fetch order:', err);
+          this.loading.set(false);
+        },
+      });
+  }
 }

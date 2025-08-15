@@ -55,6 +55,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {"host": "localhost", "port": 4200, "poll": 1000},
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {

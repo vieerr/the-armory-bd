@@ -1,32 +1,33 @@
 services:
-  # order-db:
-  #   image: mysql
-  #   container_name: order-db
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: admin123
-  #     MYSQL_DATABASE: order-db
-  #   ports:
-  #     - "3605:3306"
-  #   networks:
-  #     - the-armory-nw
-  #   healthcheck:
-  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-  #     timeout: 20s
-  #     retries: 10
+  order-db:
+    image: mysql
+    container_name: order-db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: order-db
+    ports:
+      - "3605:3306"
+    networks:
+      - the-armory-nw
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
-  # redis-tracking:
-  #   image: redis
-  #   container_name: redis-tracking
-  #   ports:
-  #     - "6379:6379"
-  #   networks:
-  #     - the-armory-nw
-  #   healthcheck:
-  #     test: ["CMD", "redis-cli", "ping"]
-  #     interval: 30s
-  #     timeout: 20s
-  #     retries: 5
-  #   # restart: unless-stopped
+  redis-tracking:
+    image: redis:7-alpine
+        # command: redis-server --bind 0.0.0.0 --protected-mode no
+    container_name: redis-tracking
+    ports:
+      - "6379:6379"
+    networks:
+      - the-armory-nw
+    # healthcheck:
+    #   test: ["CMD", "redis-cli", "ping"]
+    #   interval: 30s
+    #   timeout: 20s
+    #   retries: 5
+    restart: always
 
   client-pgdb:
     image: postgres:latest
@@ -79,36 +80,41 @@ services:
       - the-armory-nw
     # restart: unless-stopped
 
-  # tracking-ms:
-  #   build:
-  #     context: ./tracking-ms
-  #     dockerfile: Dockerfile
-  #   container_name: tracking-ms
-  #   depends_on:
-  #     redis-tracking:
-  #       condition: service_healthy
-  #   ports:
-  #     - "1414:8080"
-  #   networks:
-  #     - the-armory-nw
-  #   # restart: unless-stopped
+  tracking-ms:
+    build:
+      context: ./tracking-ms
+      dockerfile: Dockerfile
+    container_name: tracking-ms
+    depends_on:
+      - redis-tracking
+      # redis-tracking:
+      #   condition: service_healthy
+    environment:
+      PORT: 8003
+      REDIS_HOST: redis-tracking
+      REDIS_PORT: 6379
+    ports:
+      - "8003:8003"
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
 
-  # order-ms:
-  #   build:
-  #     context: ./order-ms
-  #     dockerfile: Dockerfile
-  #   container_name: order-ms
-  #   depends_on:
-  #     order-db:
-  #       condition: service_healthy
-  #   environment:
-  #     PORT: 8003
-  #     DB_HOST: order-db:3306
-  #   ports:
-  #     - "1515:8003"
-  #   networks:
-  #     - the-armory-nw
-  #   # restart: unless-stopped
+  order-ms:
+    build:
+      context: ./order-ms
+      dockerfile: Dockerfile
+    container_name: order-ms
+    depends_on:
+      order-db:
+        condition: service_healthy
+    environment:
+      PORT: 8003
+      DB_HOST: order-db:3306
+    ports:
+      - "1515:8003"
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
 
   # products-ms:
   #   build:
@@ -166,8 +172,8 @@ services:
     container_name: frontend
     ports:
       - "5173:80"
-    # volumes:
-    #   - ./frontend/src:/app/src
+    volumes:
+      - ./frontend/src:/app/src
 
     networks:
       - the-armory-nw

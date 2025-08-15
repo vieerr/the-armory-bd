@@ -15,7 +15,7 @@
         </h2>
 
         <div class="space-y-4">
-          <div>
+          <!-- <div>
             <label class="label font-medieval">
               <span class="label-text">Full Name</span>
             </label>
@@ -24,20 +24,21 @@
               placeholder="Sir Lancelot du Lac"
               class="input input-bordered w-full bg-base-100"
             />
-          </div>
+          </div> -->
 
           <div>
             <label class="label font-medieval">
               <span class="label-text">Castle Address</span>
             </label>
             <input
+              id="address"
               type="text"
               placeholder="123 Round Table Rd"
               class="input input-bordered w-full bg-base-100"
             />
           </div>
 
-          <div>
+          <!-- <div>
             <label class="label font-medieval">
               <span class="label-text">Tower/Suite (Optional)</span>
             </label>
@@ -46,9 +47,9 @@
               placeholder="Dungeon Level 3"
               class="input input-bordered w-full bg-base-100"
             />
-          </div>
+          </div> -->
 
-          <div class="grid grid-cols-2 gap-4">
+          <!-- <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="label font-medieval">
                 <span class="label-text">Kingdom</span>
@@ -104,7 +105,7 @@
               placeholder="Merlin's Familiar"
               class="input input-bordered w-full bg-base-100"
             />
-          </div>
+          </div> -->
 
           <div class="form-control">
             <label class="label cursor-pointer justify-start gap-2">
@@ -133,9 +134,10 @@
             <label class="label font-medieval">
               <span class="label-text">Saved Rune Sequence</span>
             </label>
-            <select class="select select-bordered w-full bg-base-100">
-              <option>Dragon Hoard •••• 4999</option>
-              <option>Royal Treasury •••• 1234</option>
+            <select id="paymentMethod" class="select select-bordered w-full bg-base-100">
+              <option>Visavior Royal</option>
+              <option>Master Coin</option>
+              <option>Pichinchanator</option>
             </select>
           </div>
 
@@ -146,6 +148,7 @@
               </label>
               <input
                 type="text"
+                required
                 placeholder="Waxing Gibbous"
                 class="input input-bordered w-full bg-base-100"
               />
@@ -155,6 +158,7 @@
                 <span class="label-text">Arcane Code (ACV)</span>
               </label>
               <input
+                required
                 type="password"
                 placeholder="•••"
                 class="input input-bordered w-full bg-base-100"
@@ -207,8 +211,8 @@
 
         <button
           class="btn btn-primary w-full mt-6 font-medieval text-lg"
-          routerLink="/checkout/confirmation"
-          >
+          (click)="completeOrder()"
+        >
           <ng-icon name="boxSeal" class="mr-2"></ng-icon>
           Seal the Pact
         </button>

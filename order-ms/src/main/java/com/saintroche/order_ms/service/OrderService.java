@@ -35,7 +35,7 @@ public class OrderService {
         ((java.util.Map<String, Object>) tracking).put("status", "PENDING");
         ((java.util.Map<String, Object>) tracking).put("timestamp", System.currentTimeMillis());
 
-        restTemplate.postForObject("http://localhost:1414/api/tracking", tracking, Object.class);
+        restTemplate.postForObject("http://tracking-ms:8003/api/tracking", tracking, Object.class);
 
         return saved;
     }
@@ -61,7 +61,7 @@ public class OrderService {
         ((java.util.Map<String, Object>) tracking).put("status", updated.getStatus());
         ((java.util.Map<String, Object>) tracking).put("timestamp", System.currentTimeMillis());
 
-        restTemplate.postForObject("http://localhost:1414/api/tracking", tracking, Object.class);
+        restTemplate.postForObject("http://tracking-ms:8003/api/tracking", tracking, Object.class);
 
         return updated;
     }
