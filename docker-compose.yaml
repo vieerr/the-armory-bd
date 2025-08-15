@@ -1,0 +1,184 @@
+services:
+  # order-db:
+  #   image: mysql
+  #   container_name: order-db
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: admin123
+  #     MYSQL_DATABASE: order-db
+  #   ports:
+  #     - "3605:3306"
+  #   networks:
+  #     - the-armory-nw
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     timeout: 20s
+  #     retries: 10
+
+  # redis-tracking:
+  #   image: redis
+  #   container_name: redis-tracking
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - the-armory-nw
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 30s
+  #     timeout: 20s
+  #     retries: 5
+  #   # restart: unless-stopped
+
+  client-pgdb:
+    image: postgres:latest
+    container_name: client-pgdb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: clients
+    ports:
+      - "5432:5432"
+    networks:
+      - the-armory-nw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+    # restart: unless-stopped
+
+  # products-db:
+  #   image: mysql
+  #   container_name: products-db
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: admin123
+  #     MYSQL_DATABASE: products-db
+  #   ports:
+  #     - "3607:3306"
+  #   networks:
+  #     - the-armory-nw
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     timeout: 20s
+  #     retries: 10
+
+  clients-ms:
+    build:
+      context: ./clients-ms
+      dockerfile: Dockerfile
+    container_name: clients-ms
+    depends_on:
+      client-pgdb:
+        condition: service_healthy
+    environment:
+      PORT: 8003
+      DB_HOST: client-pgdb:5432
+
+    ports:
+      - "1313:8003"
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
+
+  # tracking-ms:
+  #   build:
+  #     context: ./tracking-ms
+  #     dockerfile: Dockerfile
+  #   container_name: tracking-ms
+  #   depends_on:
+  #     redis-tracking:
+  #       condition: service_healthy
+  #   ports:
+  #     - "1414:8080"
+  #   networks:
+  #     - the-armory-nw
+  #   # restart: unless-stopped
+
+  # order-ms:
+  #   build:
+  #     context: ./order-ms
+  #     dockerfile: Dockerfile
+  #   container_name: order-ms
+  #   depends_on:
+  #     order-db:
+  #       condition: service_healthy
+  #   environment:
+  #     PORT: 8003
+  #     DB_HOST: order-db:3306
+  #   ports:
+  #     - "1515:8003"
+  #   networks:
+  #     - the-armory-nw
+  #   # restart: unless-stopped
+
+  # products-ms:
+  #   build:
+  #     context: ./products-ms
+  #     dockerfile: Dockerfile
+  #   container_name: products-ms
+  #   depends_on:
+  #     products-db:
+  #       condition: service_healthy
+  #   environment:
+  #     PORT: 8003
+  #     DB_HOST: products-db:3306
+  #   ports:
+  #     - "1616:8003"
+  #   networks:
+  #     - the-armory-nw
+  #   # restart: unless-stopped
+
+  auth-ms:
+    build:
+      context: ./auth-ms
+      dockerfile: Dockerfile
+    container_name: auth-ms
+    depends_on:
+      client-pgdb:
+        condition: service_healthy
+    environment:
+      PORT: 9000
+      DB_HOST: client-pgdb:5432
+    ports:
+      - "9000:9000"
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    # depends_on:
+    #   - clients-ms
+    #   - tracking-ms
+    #   - order-ms
+    ports:
+      - "8080:8080"
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:80"
+    # volumes:
+    #   - ./frontend/src:/app/src
+
+    networks:
+      - the-armory-nw
+    # restart: unless-stopped
+
+volumes:
+  mysql_data:
+  postgres_data:
+  redis_data:
+  the-armory-nw:
+
+networks:
+  the-armory-nw:
+    driver: bridge

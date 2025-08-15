@@ -1,0 +1,155 @@
+<!-- past-orders.component.html -->
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold font-medieval text-gray-900 mb-2">
+        <ng-icon name="gameScroll" class="mr-2 align-middle"></ng-icon>
+        Cancelled Orders
+      </h1>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Order 1 -->
+      <div class="card bg-white shadow-md border border-gray-200">
+        <div class="card-body">
+          <!-- Order Header -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4"
+          >
+            <div>
+              <h2 class="text-xl font-bold font-medieval text-gray-900">
+                ORDER # ARMORY-2024-7889
+              </h2>
+              <div class="flex gap-4 mt-1">
+                <p class="text-gray-600">ORDER DATE: May 12, 1492</p>
+                <p class="text-gray-600">CANCELLED: May 13, 1492</p>
+              </div>
+            </div>
+            <div class="text-right mt-2 sm:mt-0">
+              <p class="text-sm text-gray-500">Total</p>
+              <p class="text-2xl font-bold text-amber-700">$120.00</p>
+            </div>
+          </div>
+
+          <!-- Order Details -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Shipping Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                SHIPPING ADDRESS
+              </h3>
+              <address class="not-italic text-gray-700">
+                789 Wizard's Way<br />
+                Enchanted Forest, Eldoria
+              </address>
+            </div>
+
+            <!-- Items Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">ITEMS</h3>
+              <div class="text-gray-600">
+                <p>Elixir of Strength (x2)</p>
+                <p>Potion of Swiftness</p>
+              </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                PAYMENT METHOD
+              </h3>
+              <p class="text-gray-700">Copper Pennies (**** 9012)</p>
+              <div class="badge badge-error gap-2 mt-2">
+                <ng-icon name="gameCancel" class="text-white"></ng-icon>
+                <span class="text-white">Cancelled</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Actions -->
+          <div class="card-actions justify-end mt-6">
+            <button class="btn btn-outline btn-primary btn-sm font-medieval">
+              <ng-icon name="gameReceiveMoney" class="mr-1"></ng-icon>
+              View Receipt
+            </button>
+            <button class="btn btn-outline btn-secondary btn-sm font-medieval">
+              <ng-icon name="gameAbstract014" class="mr-1"></ng-icon>
+              Reorder
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order 2 -->
+      <div class="card bg-white shadow-md border border-gray-200">
+        <div class="card-body">
+          <!-- Order Header -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4"
+          >
+            <div>
+              <h2 class="text-xl font-bold font-medieval text-gray-900">
+                ORDER # ARMORY-2024-7888
+              </h2>
+              <div class="flex gap-4 mt-1">
+                <p class="text-gray-600">ORDER DATE: April 28, 1492</p>
+                <p class="text-gray-600">CANCELLED: April 29, 1492</p>
+              </div>
+            </div>
+            <div class="text-right mt-2 sm:mt-0">
+              <p class="text-sm text-gray-500">Total</p>
+              <p class="text-2xl font-bold text-amber-700">$50.00</p>
+            </div>
+          </div>
+
+          <!-- Order Details -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Shipping Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                SHIPPING ADDRESS
+              </h3>
+              <address class="not-italic text-gray-700">
+                123 Dragon's Breath Alley<br />
+                Old Town, Westeros
+              </address>
+            </div>
+
+            <!-- Items Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">ITEMS</h3>
+              <div class="text-gray-600">
+                <p>Map of Forgotten Lands</p>
+              </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                PAYMENT METHOD
+              </h3>
+              <p class="text-gray-700">Gold Coins (**** 1234)</p>
+              <div class="badge badge-error gap-2 mt-2">
+                <ng-icon name="gameCancel" class="text-white"></ng-icon>
+                <span class="text-white">Cancelled</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Actions -->
+          <div class="card-actions justify-end mt-6">
+            <button class="btn btn-outline btn-primary btn-sm font-medieval">
+              <ng-icon name="gameReceiveMoney" class="mr-1"></ng-icon>
+              View Receipt
+            </button>
+            <button class="btn btn-outline btn-secondary btn-sm font-medieval">
+              <ng-icon name="gameAbstract014" class="mr-1"></ng-icon>
+              Reorder
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

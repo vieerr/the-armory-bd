@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, nord;
+}
+@utility btn {
+  @apply border-1 border-black shadow-[2px_2px_0_0_black] rounded-none 
+  bg-white text-black font-bold transition-colors duration-200 ease-in-out;
+  &:hover {
+    @apply bg-[#ff3366] text-white;
+  }
+  &:active {
+    box-shadow: 1px 1px 0 0 black;
+    transform: translate(1px, 1px);
+  }
+}
+
+@utility tabs {
+  @apply flex bg-none text-black  p-0 rounded-none font-bold;
+}
+
+@utility tab {
+  @apply cursor-pointer bg-white border-2 border-black 
+         transition-all duration-200 ease-in-out relative;
+  &:hover {
+    @apply bg-[#f0f0f0];
+  }
+
+  &.active {
+    @apply bg-black text-white;
+    &::after {
+      content: "";
+      @apply absolute bottom-[-2px] left-0 w-full h-[2px] bg-[#ff3366];
+    }
+  }
+}
+
+@utility tab-content {
+  @apply bg-white text-black border-2 border-black rounded-none 
+         shadow-[4px_4px_0_0_black];
+  &.hidden {
+    @apply hidden;
+  }
+}
+
+@utility navbar {
+  @apply bg-white text-black border-b-2 border-black p-4 flex justify-between items-center shadow-[4px_4px_0_0_black] rounded-none font-bold;
+  .nav-link {
+    @apply text-white hover:text-gray-300;
+  }
+}
+
+@utility card {
+  @apply bg-white text-black border-2 border-black rounded-md p-4  shadow-[1px_1px_0px_0px_black] transition-transform duration-200 ease-in-out;
+  .card-title {
+    @apply font-bold text-lg mb-2;
+  }
+  .card-content {
+    @apply text-base;
+  }
+}
+
+@utility input {
+  @apply border-2 border-black rounded-md p-2 w-full transition-colors duration-200 ease-in-out;
+  &:focus {
+    @apply border-blue-900 outline-none;
+  }
+}

@@ -1,0 +1,133 @@
+<!-- order-confirmation.component.html -->
+<div class="min-h-screen bg-amber-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Main receipt container -->
+    <div class="relative bg-white p-8 md:p-12 rounded-lg shadow-xl border-2 border-amber-200">
+      <!-- Wax seal decoration -->
+      <div class="absolute -top-6 -right-6 w-16 h-16 bg-red-700 rounded-full flex items-center justify-center shadow-lg">
+        <div class="w-12 h-12 bg-red-800 rounded-full flex items-center justify-center">
+          <ng-icon name="gameWaxSeal" class="text-amber-200" size="2em"></ng-icon>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold font-medieval text-amber-900 mb-2">
+          <ng-icon name="gameScrollUnfurled" class="mr-2 align-middle"></ng-icon>
+          Order Summons Fulfilled
+        </h1>
+        <p class="text-amber-600 italic">By royal decree of the Merchant's Guild</p>
+      </div>
+
+      <!-- Order details -->
+      <div class="space-y-8">
+        <!-- Order info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <h2 class="text-xl font-medieval text-amber-800 border-b border-amber-200 pb-2 flex items-center">
+              <ng-icon name="gameTreasureMap" class="mr-2"></ng-icon>
+              Scroll of Transaction
+            </h2>
+            <p><span class="font-bold">Order #:</span> {{orderId}}</p>
+            <p><span class="font-bold">Date:</span> {{orderDate | date:'fullDate'}}</p>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="text-xl font-medieval text-amber-800 border-b border-amber-200 pb-2 flex items-center">
+              <ng-icon name="gameDeliveryDrone" class="mr-2"></ng-icon>
+              Owl Post Dispatch
+            </h2>
+            <p><span class="font-bold">Via:</span> {{shippingMethod}}</p>
+            <p><span class="font-bold">Expected:</span> {{expectedDeliveryDate | date}}</p>
+          </div>
+        </div>
+
+        <!-- Items summary -->
+        <div>
+          <h3 class="text-xl font-medieval text-amber-800 border-b border-amber-200 pb-2 mb-4 flex items-center">
+            <ng-icon name="gameOpenTreasureChest" class="mr-2"></ng-icon>
+            Quest Items Acquired
+          </h3>
+          <div class="divide-y divide-amber-100">
+            @for (item of cartItems; track $index) {
+              <div class="py-3 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-amber-100 rounded flex items-center justify-center">
+                    <ng-icon name="gameCrystalBall" class="text-amber-600"></ng-icon>
+                  </div>
+                  <div>
+                    <p class="font-medium">{{item.name}}</p>
+                    <p class="text-sm text-amber-600">Quantity: {{item.quantity}}</p>
+                  </div>
+                </div>
+                <span class="font-bold">{{item.price * item.quantity | currency}}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Payment and shipping -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-medieval text-amber-800 border-b border-amber-200 pb-2 mb-4 flex items-center">
+              <ng-icon name="gameCastle" class="mr-2"></ng-icon>
+              Destination Scroll
+            </h3>
+            <address class="not-italic space-y-1">
+              <p class="font-bold">{{shippingAddress.fullName}}</p>
+              <p>{{shippingAddress.street1}}</p>
+              @if (shippingAddress.street2) {
+                <p>{{shippingAddress.street2}}</p>
+              }
+              <p>{{shippingAddress.city}}, {{shippingAddress.realm}}</p>
+              <p>{{shippingAddress.scrollCode}}</p>
+              <p>{{shippingAddress.kingdom}}</p>
+            </address>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-medieval text-amber-800 border-b border-amber-200 pb-2 mb-4 flex items-center">
+              <ng-icon name="gameCoinStack" class="mr-2"></ng-icon>
+              Rune Payment
+            </h3>
+            <div class="space-y-2">
+              <p><span class="font-bold">Method:</span> Dragon Hoard •••• {{paymentMethod.lastFour}}</p>
+              <p><span class="font-bold">Expires:</span> {{paymentMethod.expiry}}</p>
+              <div class="pt-2">
+                <p class="text-sm">Total Paid:</p>
+                <p class="text-2xl font-bold text-amber-700">{{orderTotal | currency}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="relative flex py-4 items-center">
+          <div class="flex-grow border-t border-amber-200"></div>
+          <span class="flex-shrink mx-4 text-amber-600 italic">Sealed and Approved</span>
+          <div class="flex-grow border-t border-amber-200"></div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button class="btn btn-primary flex-1 font-medieval hover:bg-amber-700 transition-colors" routerLink="/armory">
+            <ng-icon name="gamePointySword" class="mr-2"></ng-icon>
+            Continue Questing
+          </button>
+          <button class="btn btn-outline btn-secondary flex-1 font-medieval hover:bg-amber-100 transition-colors">
+            <ng-icon name="gameBlackKnightHelm" class="mr-2"></ng-icon>
+            View Summons Scroll
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support info -->
+    <div class="text-center mt-8 text-sm text-amber-700">
+      <p>
+        Need assistance with your order? Send a raven to
+        <a href="mailto:royalmerchant@kingdom.com" class="font-bold text-amber-800 hover:underline">royalmerchant@kingdom.com</a>
+      </p>
+    </div>
+  </div>
+</div>

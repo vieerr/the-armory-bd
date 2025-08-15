@@ -22,14 +22,14 @@ spring:
               - "*"
             allowCredentials: true
       routes:
-        - id: c-app-products
-          uri: http://c-app-products:8003
+        - id: clients-ms
+          uri: http://clients-ms:8003
           predicates:
-            - Path=/api/products/**
-        - id: c-app-categories
-          uri: http://c-app-categories:8003
+            - Path=/api/clients/**
+        - id: auth-ms
+          uri: http://auth-ms:8003
           predicates:
-            - Path=/api/categories/**
+            - Path=/api/auth/**
 
   logging:
     level:

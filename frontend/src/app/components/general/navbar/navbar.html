@@ -1,0 +1,193 @@
+<div class="navbar bg-base-100 shadow-lg">
+  <!-- Left Side - Brand & Categories -->
+  <div class="navbar-start">
+    <div class="flex items-center">
+      <a class="btn btn-ghost text-xl font-medieval" routerLink="/">
+        <ng-icon name="gameSwordBrandish" class="mr-2 text-amber-600"></ng-icon>
+        The Armory
+      </a>
+
+      <!-- Desktop Categories -->
+      <div class="hidden md:flex ml-4">
+        <div class="dropdown dropdown-hover">
+          <label tabindex="0" class="btn btn-ghost font-medieval">
+            <ng-icon name="gameScrollUnfurled" class="mr-1"></ng-icon>
+            Categories
+          </label>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a
+                ><ng-icon name="gameHelmet" class="mr-2"></ng-icon>Armor &
+                Weapons</a
+              >
+            </li>
+            <li>
+              <a
+                ><ng-icon name="gameWizardStaff" class="mr-2"></ng-icon>Magic
+                Supplies</a
+              >
+            </li>
+            <li>
+              <a
+                ><ng-icon name="gameDragonHead" class="mr-2"></ng-icon>Creature
+                Companions</a
+              >
+            </li>
+            <li>
+              <a
+                ><ng-icon name="gameBookPile" class="mr-2"></ng-icon>Ancient
+                Tomes</a
+              >
+            </li>
+            <li>
+              <a
+                ><ng-icon name="gameMagicPotion" class="mr-2"></ng-icon>Alchemy
+                Ingredients</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <a class="btn btn-ghost font-medieval">
+          <ng-icon name="gameOpenTreasureChest" class="mr-1"></ng-icon>
+          Guild Deals
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Center - Search -->
+  <div class="navbar-center hidden lg:flex">
+    <div class="form-control w-max-lg">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Seek magical items..."
+          class="input input-bordered w-full pl-10 font-medieval"
+        />
+        <ng-icon
+          name="gameArchiveResearch"
+          class="absolute left-3 top-3 text-gray-400"
+        ></ng-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side - Account & Cart -->
+  <div class="navbar-end md:gap-2">
+    <!-- Cart with Label -->
+
+    <a
+      class="btn btn-ghost font-medieval"
+      routerLink="/orders"
+
+      >
+      <ng-icon name="gameBoxUnpacking" class="text-xl sm:mr-1"></ng-icon>
+      <span class="hidden sm:inline-block">Your Orders</span>
+    </a>
+
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost">
+        <div class="indicator">
+          <ng-icon name="gameBackpack" class="text-xl"></ng-icon>
+          <!-- <span class="badge badge-sm indicator-item badge-primary">{{cartCount}}</span> -->
+        </div>
+        <span class="hidden sm:inline-block ml-1 font-medieval"
+          >Cart ({{cartCount}})</span
+        >
+      </div>
+      <div
+        tabindex="0"
+        class="card dropdown-content bg-base-100 z-10 mt-3 w-72 shadow-lg"
+      >
+        <div class="card-body">
+          <h3 class="card-title font-medieval">
+            <ng-icon name="gameBackpack" class="mr-2"></ng-icon>
+            Your Loot ({{cartCount}})
+          </h3>
+          <p class="text-amber-600">Subtotal: {{cartTotal | currency}}</p>
+          <div class="card-actions mt-2">
+            <button
+              class="btn btn-primary btn-block font-medieval"
+              routerLink="/cart"
+            >
+              <ng-icon name="gameScrollQuill" class="mr-2"></ng-icon>
+              View Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost">
+        <ng-icon name="gameBlackKnightHelm"></ng-icon>
+        <span class="hidden sm:inline-block ml-1 font-medieval">Account</span>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow-lg"
+      >
+        <li>
+          <a class="font-medieval">
+            <ng-icon name="gamePlayerBase" class="mr-2"></ng-icon>
+            Profile
+          </a>
+        </li>
+        <li>
+          <a class="font-medieval">
+            <ng-icon name="gameGears" class="mr-2"></ng-icon>
+            Settings
+          </a>
+        </li>
+        <li>
+          <a class="font-medieval text-error">
+            <ng-icon name="gameExitDoor" class="mr-2"></ng-icon>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Categories -->
+<div class="md:hidden bg-base-200 p-2">
+  <div class="dropdown dropdown-hover w-full">
+    <label tabindex="0" class="btn btn-block btn-ghost font-medieval">
+      <ng-icon name="gameScrollUnfurled" class="mr-2"></ng-icon>
+      Browse Categories
+    </label>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full"
+    >
+      <li>
+        <a><ng-icon name="gameHelmet" class="mr-2"></ng-icon>Armor & Weapons</a>
+      </li>
+      <li>
+        <a
+          ><ng-icon name="gameWizardStaff" class="mr-2"></ng-icon>Magic
+          Supplies</a
+        >
+      </li>
+      <li>
+        <a
+          ><ng-icon name="gameDragonHead" class="mr-2"></ng-icon>Creature
+          Companions</a
+        >
+      </li>
+      <li>
+        <a><ng-icon name="gameBookPile" class="mr-2"></ng-icon>Ancient Tomes</a>
+      </li>
+      <li>
+        <a
+          ><ng-icon name="gameMagicPotion" class="mr-2"></ng-icon>Alchemy
+          Ingredients</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

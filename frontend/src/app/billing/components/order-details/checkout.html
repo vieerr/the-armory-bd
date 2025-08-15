@@ -1,0 +1,226 @@
+<!-- checkout.component.html -->
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+  <h1 class="text-3xl font-bold mb-8 text-center font-medieval">
+    Order Summons
+  </h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Left Column - Shipping & Payment -->
+    <div class="space-y-8">
+      <!-- Shipping Address Scroll -->
+      <div class="card bg-base-200 p-6 shadow-lg border-2 border-gray-700">
+        <h2 class="text-2xl font-medieval mb-4 flex items-center gap-2">
+          <ng-icon name="gameQuill" size="1.5em"></ng-icon>
+          Shipping Scroll
+        </h2>
+
+        <div class="space-y-4">
+          <div>
+            <label class="label font-medieval">
+              <span class="label-text">Full Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Sir Lancelot du Lac"
+              class="input input-bordered w-full bg-base-100"
+            />
+          </div>
+
+          <div>
+            <label class="label font-medieval">
+              <span class="label-text">Castle Address</span>
+            </label>
+            <input
+              type="text"
+              placeholder="123 Round Table Rd"
+              class="input input-bordered w-full bg-base-100"
+            />
+          </div>
+
+          <div>
+            <label class="label font-medieval">
+              <span class="label-text">Tower/Suite (Optional)</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Dungeon Level 3"
+              class="input input-bordered w-full bg-base-100"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Kingdom</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Camelot"
+                class="input input-bordered w-full bg-base-100"
+              />
+            </div>
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Realm</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Albion"
+                class="input input-bordered w-full bg-base-100"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Scroll Code</span>
+              </label>
+              <input
+                type="text"
+                placeholder="EXC4L1BUR"
+                class="input input-bordered w-full bg-base-100"
+              />
+            </div>
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Country</span>
+              </label>
+              <select class="select select-bordered w-full bg-base-100">
+                <option>Elvish Kingdoms</option>
+                <option>Dwarven Holds</option>
+                <option>Human Realms</option>
+                <option>Mystic Isles</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="label font-medieval">
+              <span class="label-text">Owl Post Contact</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Merlin's Familiar"
+              class="input input-bordered w-full bg-base-100"
+            />
+          </div>
+
+          <div class="form-control">
+            <label class="label cursor-pointer justify-start gap-2">
+              <input
+                type="checkbox"
+                checked
+                class="checkbox checkbox-primary"
+              />
+              <span class="label-text font-medieval"
+                >Enchant this address for future quests</span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method Scroll -->
+      <div class="card bg-base-200 p-6 shadow-lg border-2 border-gray-700">
+        <h2 class="text-2xl font-medieval mb-4 flex items-center gap-2">
+          <ng-icon name="boxCoinStack" size="1.5em"></ng-icon>
+          Payment Runes
+        </h2>
+
+        <div class="space-y-4">
+          <div>
+            <label class="label font-medieval">
+              <span class="label-text">Saved Rune Sequence</span>
+            </label>
+            <select class="select select-bordered w-full bg-base-100">
+              <option>Dragon Hoard •••• 4999</option>
+              <option>Royal Treasury •••• 1234</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Moon Phase</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Waxing Gibbous"
+                class="input input-bordered w-full bg-base-100"
+              />
+            </div>
+            <div>
+              <label class="label font-medieval">
+                <span class="label-text">Arcane Code (ACV)</span>
+              </label>
+              <input
+                type="password"
+                placeholder="•••"
+                class="input input-bordered w-full bg-base-100"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Order Summary -->
+    <div
+      class="card bg-base-200 p-6 shadow-lg border-2 border-gray-700 h-fit sticky top-4"
+    >
+      <h2 class="text-2xl font-medieval mb-4 flex items-center gap-2">
+        <ng-icon name="boxScrollSeal" size="1.5em"></ng-icon>
+        Quest Items
+      </h2>
+
+      <div class="space-y-4">
+        @for (item of products; track item.id) {
+        <div
+          class="flex justify-between items-center border-b border-base-300 pb-2"
+        >
+          <div>
+            <h3 class="font-medieval">{{item.name}}</h3>
+            <p class="text-sm text-gray-500">Qty: {{item.quantity}}</p>
+          </div>
+          <span class="font-bold"
+            >{{item.price * item.quantity | currency}}</span
+          >
+        </div>
+        }
+        <div class="divider"></div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span>Subtotal:</span>
+            <span>{{subtotal | currency}}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Owl Post Fee:</span>
+            <span>{{shippingCost | currency}}</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold">
+            <span>Total Gold:</span>
+            <span>{{subtotal + shippingCost | currency}}</span>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary w-full mt-6 font-medieval text-lg"
+          routerLink="/checkout/confirmation"
+          >
+          <ng-icon name="boxSeal" class="mr-2"></ng-icon>
+          Seal the Pact
+        </button>
+
+        <div class="text-center mt-4 text-sm text-gray-500">
+          <p>
+            By completing your order, you agree to our
+            <a href="#" class="link link-primary">Royal Decree</a> and
+            <a href="#" class="link link-primary">Magical Terms</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

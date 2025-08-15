@@ -1,0 +1,162 @@
+<!-- past-orders.component.html -->
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold font-medieval text-gray-900 mb-2">
+        <ng-icon name="gameScroll" class="mr-2 align-middle"></ng-icon>
+        Your Orders
+      </h1>
+    </div>
+
+    <!-- Orders List -->
+    <div class="space-y-6">
+      <!-- Order 1 -->
+      <div class="card bg-white shadow-md border border-gray-200">
+        <div class="card-body">
+          <!-- Order Header -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4"
+          >
+            <div>
+              <h2 class="text-xl font-bold font-medieval text-gray-900">
+                ORDER # ARMORY-2024-7890
+              </h2>
+              <p class="text-gray-600">ORDER DATE: May 15, 1492</p>
+            </div>
+            <div class="text-right mt-2 sm:mt-0">
+              <p class="text-sm text-gray-500">Total</p>
+              <p class="text-2xl font-bold text-amber-700">$679.92</p>
+            </div>
+          </div>
+
+          <!-- Order Details -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Shipping Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                SHIPPING ADDRESS
+              </h3>
+              <address class="not-italic text-gray-700">
+                123 Dragon's Breath Alley<br />
+                Old Town, Westeros
+              </address>
+            </div>
+
+            <!-- Delivery Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                DELIVERY STATUS
+              </h3>
+              <div class="flex items-center gap-2 text-success">
+                <ng-icon name="gameCheckmark" class="text-success"></ng-icon>
+                <span>Delivered</span>
+              </div>
+              <p class="text-gray-600 mt-1">
+                Enchanted Ear-Guards, Chronometer Amulet, and 6 more items
+              </p>
+            </div>
+
+            <!-- Payment Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                PAYMENT METHOD
+              </h3>
+              <p class="text-gray-700">Gold Coins (**** 1234)</p>
+            </div>
+          </div>
+
+          <!-- Order Actions -->
+          <div class="card-actions justify-end mt-6">
+            <button class="btn btn-outline btn-error btn-sm font-medieval">
+              <ng-icon name="gameCancel" class="mr-1"></ng-icon>
+              Cancel Order
+            </button>
+            <button
+              routerLink="/orders/tracking/1"
+              class="btn btn-outline btn-primary btn-sm font-medieval"
+            >
+              <ng-icon name="gameMap" class="mr-1"></ng-icon>
+              Track Order
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order 2 -->
+      <div class="card bg-white shadow-md border border-gray-200">
+        <div class="card-body">
+          <!-- Order Header -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4"
+          >
+            <div>
+              <h2 class="text-xl font-bold font-medieval text-gray-900">
+                ORDER # ARMORY-2024-7891
+              </h2>
+              <p class="text-gray-600">ORDER DATE: May 10, 1492</p>
+            </div>
+            <div class="text-right mt-2 sm:mt-0">
+              <p class="text-sm text-gray-500">Total</p>
+              <p class="text-2xl font-bold text-amber-700">$249.99</p>
+            </div>
+          </div>
+
+          <!-- Order Details -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Shipping Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                SHIPPING ADDRESS
+              </h3>
+              <address class="not-italic text-gray-700">
+                456 Knight's Rest<br />
+                King's Landing, Westeros
+              </address>
+            </div>
+
+            <!-- Delivery Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                DELIVERY STATUS
+              </h3>
+              <div class="flex items-center gap-2 text-warning">
+                <ng-icon name="gameShipWheel" class="text-warning"></ng-icon>
+                <span>Shipped</span>
+              </div>
+              <p class="text-gray-600 mt-1">
+                Grand Master's Sword, Shield of Valor
+              </p>
+              <p class="text-sm text-gray-500 mt-1">
+                Estimated Delivery: May 20, 1492
+              </p>
+            </div>
+
+            <!-- Payment Info -->
+            <div>
+              <h3 class="font-medieval text-lg text-gray-800 mb-2">
+                PAYMENT METHOD
+              </h3>
+              <p class="text-gray-700">Silver Shillings (**** 5678)</p>
+            </div>
+          </div>
+
+          <!-- Order Actions -->
+          <div class="card-actions justify-end mt-6">
+            <button class="btn btn-outline btn-error btn-sm font-medieval">
+              <ng-icon name="gameCancel" class="mr-1"></ng-icon>
+              Cancel Order
+            </button>
+            <button
+              routerLink="/orders/tracking/1"
+              class="btn btn-outline btn-primary btn-sm font-medieval"
+            >
+              <ng-icon name="gameMap" class="mr-1"></ng-icon>
+              Track Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

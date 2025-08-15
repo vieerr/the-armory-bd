@@ -1,0 +1,20 @@
+<google-map mapId="4b46b25ed15ff8d832029f3b" [center]="center" [zoom]="zoom" height="500px" width="100%">
+  @for (marker of markers; track marker) {
+  <map-advanced-marker
+    #markerElem="mapAdvancedMarker"
+    [position]="{ lat: marker.lat, lng: marker.lng }"
+    [title]="marker.label"
+    (mapClick)="openInfoWindow(marker, markerElem)"
+  ></map-advanced-marker>
+  }
+
+  <map-info-window>
+    @if (selectedMarker) {
+    <div>
+      <h3>Marker {{ selectedMarker.label }}</h3>
+      <p>Latitude: {{ selectedMarker.lat }}</p>
+      <p>Longitude: {{ selectedMarker.lng }}</p>
+    </div>
+    }
+  </map-info-window>
+</google-map>

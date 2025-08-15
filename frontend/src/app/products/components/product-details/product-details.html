@@ -1,0 +1,169 @@
+<div class="p-4 md:p-10 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <!-- Product Images Gallery -->
+    <div class="flex flex-col md:flex-row gap-4 lg:gap-6">
+      <!-- Thumbnail Navigation -->
+      <div class="flex md:flex-col gap-2 order-2 md:order-1">
+        @for (thumb of [1,2,3]; track $index) {
+        <button
+          class="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-base-300 hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+        >
+          <img
+            [src]="product.imageUrl"
+            alt="Thumbnail {{thumb}}"
+            class="w-full h-full object-cover"
+          />
+        </button>
+        }
+      </div>
+
+      <!-- Main Product Image -->
+      <div class="relative order-1 md:order-2 flex-1">
+        <div class="sticky top-4">
+          <div class="card bg-base-100 shadow-lg overflow-hidden aspect-square">
+            <img
+              [src]="product.imageUrl"
+              [alt]="product.name"
+              class="w-full h-full object-contain p-4"
+            />
+          </div>
+          <!-- Badge for special offers -->
+           <!-- TODO DISSCOUNT -->
+          <!-- <div
+            *ngIf="product.discount"
+            class="absolute top-4 right-4 badge badge-accent animate-pulse"
+          >
+            -{{product.discount}}%
+          <!-- Modern Angular syntax with hardcoded value -->
+          @if (true) {
+            <div class="absolute top-4 right-4 badge badge-accent animate-pulse">
+              -10%
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="space-y-6">
+      <!-- Title and Rating -->
+      <div>
+        <h1 class="text-3xl lg:text-4xl font-bold font-serif text-primary">
+          {{product.name}}
+        </h1>
+        <div class="flex items-center mt-3 gap-2">
+          <div class="rating rating-md">
+            @for (star of [1,2,3,4,5]; track $index) {
+            <input
+              type="radio"
+              name="rating"
+              class="mask mask-star-2 bg-orange-400"
+              [checked]="star === (product.rating)"
+            />
+            }
+          </div>
+          <!-- TODO: review count -->
+          <!-- <span class="text-sm text-gray-500 ml-1"
+            >({{product.reviewCount}} reviews)</span
+          > -->
+          <span class="text-sm my-5 text-gray-500 ml-1">(1000 reviews)</span>
+      </div>
+
+      <!-- Price Section -->
+      <div class="space-y-1">
+        <div class="flex items-baseline gap-3">
+          <span class="text-3xl font-bold text-accent"
+            >{{product.price | currency}}</span
+          >
+          <!-- <span *ngIf="product.originalPrice" class="text-lg line-through text-gray-400">{{product.originalPrice | currency}}</span> -->
+        </div>
+
+      </div>
+
+      <!-- Description -->
+      <div class="prose max-w-none my-5">
+        <p class="text-gray-700">{{product.description}}</p>
+      </div>
+
+      <!-- Quantity and Add to Cart -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center border-2 border-base-300 rounded-btn overflow-hidden"
+          >
+            <button
+              class="btn btn-ghost btn-square"
+              (click)="decrementQuantity()"
+              [disabled]="quantity <= 1"
+            >
+              <ng-icon name="boxMinus" size="1.5em"></ng-icon>
+            </button>
+            <input
+              type="string"
+              class="w-12 text-center border-none bg-transparent focus:outline-none appearance-none"
+              [min]="1"
+              [max]="99"
+              [value]="quantity"
+              readonly
+            />
+            <button
+              class="btn btn-ghost btn-square"
+              (click)="incrementQuantity()"
+              [disabled]="quantity >= 99"
+            >
+              <ng-icon name="boxPlus" size="1.5em"></ng-icon>
+            </button>
+          </div>
+
+          <div class="tooltip" data-tip="In stock and ready to ship">
+            <span class="badge badge-success gap-1">
+              <ng-icon name="boxCheck"></ng-icon>
+              In Stock
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 my-5">
+          <button
+            class="btn btn-primary flex-1 gap-2"
+            (click)="addToCart(product, quantity)"
+          >
+            <ng-icon name="boxCartAdd"></ng-icon>
+            Add to Cart
+          </button>
+
+          <button class="btn btn-outline btn-secondary flex-1 gap-2">
+            <ng-icon name="boxHeart"></ng-icon>
+            Wishlist
+          </button>
+        </div>
+      </div>
+
+      <!-- Highlights -->
+      <div class="space-y-4">
+        <div class="divider"></div>
+        <h3 class="text-xl font-bold">Product Highlights</h3>
+        <ul class="space-y-2">
+          @for (detail of product.details; track $index) {
+          <li class="flex items-start gap-2">
+            <ng-icon name="boxCheck" class="text-success mt-0.5"></ng-icon>
+            <span>{{ detail }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="collapse collapse-plus bg-base-200 my-5">
+        <input type="checkbox" />
+        <div class="collapse-title text-lg font-medium">Shipping & Returns</div>
+        <div class="collapse-content">
+          <p>
+            Free standard shipping on all orders. Returns accepted within 30
+            days.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
